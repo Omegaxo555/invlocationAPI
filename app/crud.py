@@ -1,6 +1,19 @@
 from sqlalchemy.orm import Session
 from . import models, schemas
+from .core import security
 from typing import Optional
+
+# Users
+def get_user_by_email(db: Session, email: str):
+    return db.query(models.UserDB).filter(models.UserDB.email == email).first()
+
+def create_user(db: Session, user: schemas.UserCreate):
+    hashed_password = security.get_password_hash(user.password)
+    db_user = models.UserDB(email=user.email, hashed_password=hashed_password, is_active=user.is_active)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
 
 # Items
 def get_item(db: Session, item_id: int):

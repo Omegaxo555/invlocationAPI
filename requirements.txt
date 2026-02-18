@@ -5,4 +5,6 @@ pydantic
 pydantic-settings
 alembic
 python-multipart
-# Add any other dependencies if needed
+python-jose[cryptography]
+passlib[bcrypt]
+gunicorn

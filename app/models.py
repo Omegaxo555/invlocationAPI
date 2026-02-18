@@ -55,3 +55,10 @@ class TransactionDB(Base, TimestampMixin):
 
     item = relationship("ItemDB", back_populates="transactions")
     location = relationship("LocationDB", back_populates="transactions")
+
+class UserDB(Base, TimestampMixin):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)

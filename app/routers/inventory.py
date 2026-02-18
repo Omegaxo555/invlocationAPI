@@ -3,11 +3,13 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from .. import schemas, crud
 from ..db import get_db
+from .. import deps
 
 router = APIRouter(
     prefix="/inventory",
     tags=["inventory"],
     responses={404: {"description": "Not found"}},
+    dependencies=[Depends(deps.get_current_active_user)]
 )
 
 @router.post("/movement", response_model=schemas.InventoryResponse)

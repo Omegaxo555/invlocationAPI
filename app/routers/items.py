@@ -3,11 +3,13 @@ from sqlalchemy.orm import Session
 from typing import List
 from .. import schemas, crud
 from ..db import get_db
+from .. import deps, models
 
 router = APIRouter(
     prefix="/items",
     tags=["items"],
     responses={404: {"description": "Not found"}},
+    dependencies=[Depends(deps.get_current_active_user)]
 )
 
 @router.post("/", response_model=schemas.ItemResponse)

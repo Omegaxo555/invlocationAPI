@@ -27,9 +27,19 @@ A robust REST API for managing inventory, locations, and stock movements. built 
 
 3. Access generic API docs at: http://127.0.0.1:8000/docs
 
-## Key Endpoints
+### Authentication
+- **Secure Access**: All core endpoints now require JWT Authentication.
+- **Register**: `POST /register` to create a new user.
+- **Login**: `POST /token` (OAuth2 compatible) to get an access token.
+- **Authorize**: Click "Authorize" in Swagger UI and input your token.
 
-### Inventory Movement
+### Key Endpoints
+
+#### Auth
+- `POST /register`: Create account.
+- `POST /token`: Login and get JWT.
+
+#### Inventory Movement
 `POST /inventory/movement`
 - Use this endpoint to add or remove stock.
 - `quantity`: Positive to add, negative to remove.

@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from app import models
 from app.db import engine
-from app.routers import items, locations, inventory
+from app.routers import items, locations, inventory, auth
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+app.include_router(auth.router)
 app.include_router(items.router)
 app.include_router(locations.router)
 app.include_router(inventory.router)
